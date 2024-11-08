@@ -6,6 +6,19 @@ const port = 4000;
 const expressServer = app.listen(port);
 console.log(`Server is running on port ${port}`);
 
+const socket = new WebSocket(
+  "wss://back-chat-pi.vercel.app/socket.io/?EIO=4&transport=websocket"
+);
+socket.onopen = () => {
+  console.log("WebSocket connected");
+};
+socket.onerror = (error) => {
+  console.error("WebSocket error:", error);
+};
+socket.onmessage = (message) => {
+  console.log("Received message:", message);
+};
+
 const { Server } = require("socket.io");
 const io = new Server(expressServer, {
   cors: {
