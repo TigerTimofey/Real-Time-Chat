@@ -3,10 +3,9 @@
 const socket = io(
   window.location.hostname === "localhost"
     ? "http://localhost:4000"
-    : "https://back-chat-pi.vercel.app:4000",
+    : "https://back-chat-pi.vercel.app",
   {}
 );
-console.log("ok");
 
 const getRandomColor = () => {
   const letters = "0123456789ABCDEF";
