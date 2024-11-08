@@ -3,7 +3,7 @@
 const socket = io(
   window.location.hostname === "localhost"
     ? "http://localhost:4000"
-    : "https://back-chat-pmgtv3w0q-tigertimofeys-projects.vercel.app",
+    : "https://back-chat-pi.vercel.app",
   {}
 );
 

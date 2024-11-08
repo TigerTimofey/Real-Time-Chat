@@ -9,7 +9,7 @@ console.log(`Server is running on port ${port}`);
 const { Server } = require("socket.io");
 const io = new Server(expressServer, {
   cors: {
-    origin: "https://front-chat-6qm6vhmu8-tigertimofeys-projects.vercel.app",
+    origin: "https://front-chat-flame.vercel.app",
     methods: ["GET", "POST"],
   },
 });
