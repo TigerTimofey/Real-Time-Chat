@@ -1,5 +1,11 @@
 // const socket = io("http://localhost:4000", {
-const socket = io("https://real-time-chat-coral-six.vercel.app", {});
+// const socket = io("https://real-time-chat-coral-six.vercel.app", {});
+const socket = io(
+  window.location.hostname === "localhost"
+    ? "http://localhost:4000"
+    : "https://real-time-chat-coral-six.vercel.app",
+  {}
+);
 
 const getRandomColor = () => {
   const letters = "0123456789ABCDEF";
