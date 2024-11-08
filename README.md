@@ -14,6 +14,10 @@
 
 ## What does the app do?
 
+
+https://github.com/user-attachments/assets/ccea89ac-b465-4b3b-99c2-60ce894d5a34
+
+
 The Real-time Chat Application allows users to connect to a server and chat with others in real time. It uses WebSocket for real-time communication between clients and the server. Before joining the chat, users are prompted to provide a username.
 
 ## How to start using the app
