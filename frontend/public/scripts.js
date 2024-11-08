@@ -3,13 +3,8 @@
 const socket = io(
   window.location.hostname === "localhost"
     ? "http://localhost:4000"
-    : "https://back-chat-pi.vercel.app",
-  {
-    cors: {
-      origin: "https://front-chat-flame.vercel.app",
-      methods: ["GET", "POST"],
-    },
-  }
+    : "http://back-chat-47bg4uiz8-tigertimofeys-projects.vercel.app",
+  {}
 );
 
 const getRandomColor = () => {
