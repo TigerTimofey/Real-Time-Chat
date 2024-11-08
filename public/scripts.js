@@ -4,12 +4,21 @@ const socket = io("http://localhost:4000", {
   },
 });
 
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
 // Show the modal to ask for the username
 const usernameModal = new bootstrap.Modal(
   document.getElementById("usernameModal"),
   {
-    backdrop: "static", // Prevent closing the modal by clicking outside
-    keyboard: false, // Prevent closing the modal with the keyboard
+    backdrop: "static",
+    keyboard: false,
   }
 );
 usernameModal.show();
@@ -33,14 +42,14 @@ socket.on("previousMessages", (messages) => {
   const messagesContainer = document.getElementById("messages");
   messagesContainer.innerHTML = ""; // Clear previous content
   messages.forEach((message) => {
-    messagesContainer.innerHTML += `<li>${message}</li>`;
+    messagesContainer.innerHTML += `<li><span style="color:${message.color}">${message.username}</span>: ${message.message}</li>`;
   });
 });
 
 // Handle new messages from the server
-socket.on("messageFromServerToAllClient", (newMessage) => {
+socket.on("messageFromServerToAllClient", ({ username, message, color }) => {
   const messagesContainer = document.getElementById("messages");
-  messagesContainer.innerHTML += `<li>${newMessage}</li>`;
+  messagesContainer.innerHTML += `<li><span style="color:${color}">${username}</span>: ${message}</li>`;
 });
 
 // Handle clearing messages event

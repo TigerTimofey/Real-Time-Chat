@@ -9,7 +9,7 @@ console.log(`Server is running on port ${port}`);
 const { Server } = require("socket.io");
 const io = new Server(expressServer, {
   cors: {
-    origin: "http://127.0.0.1:5501", // The address where the client is running
+    origin: "http://127.0.0.1:5501",
     methods: ["GET", "POST"],
   },
 });
@@ -17,10 +17,21 @@ const io = new Server(expressServer, {
 // Array to store all messages
 let messages = [];
 
+// Generate a random color for the user
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
 io.on("connection", (socket) => {
   console.log(`${socket.id} has joined our server!`);
 
   let username = "";
+  let userColor = getRandomColor();
 
   // Handle receiving username from client
   socket.on("setUsername", (name) => {
@@ -36,15 +47,19 @@ io.on("connection", (socket) => {
 
   // Handle receiving a new message from client
   socket.on("messageFromClientToServer", (newMessage) => {
-    const messageWithUsername = `${username}: ${newMessage}`;
+    const messageWithUsername = {
+      username: username,
+      message: newMessage,
+      color: userColor,
+    };
     messages.push(messageWithUsername);
     io.emit("messageFromServerToAllClient", messageWithUsername);
   });
 
   // Handle clearing messages
   socket.on("clearMessages", () => {
-    messages = []; // Clear the message array
-    io.emit("messagesCleared"); // Notify all clients that the chat has been cleared
+    messages = [];
+    io.emit("messagesCleared");
   });
 
   // Handle user disconnect
