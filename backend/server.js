@@ -9,7 +9,8 @@ console.log(`Server is running on port ${port}`);
 const { Server } = require("socket.io");
 const io = new Server(expressServer, {
   cors: {
-    origin: "http://127.0.0.1:5501",
+    // origin: "http://127.0.0.1:5501",
+    origin: "https://real-time-chat-dpsm.vercel.app",
     methods: ["GET", "POST"],
   },
 });
