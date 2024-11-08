@@ -13,6 +13,18 @@ const getRandomColor = () => {
   return color;
 };
 
+const getFormattedTime = () => {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
+
+const scrollToBottom = () => {
+  const messagesContainer = document.getElementById("messages");
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+};
+
 // Show the modal to ask for the username
 const usernameModal = new bootstrap.Modal(
   document.getElementById("usernameModal"),
@@ -41,15 +53,35 @@ document.getElementById("set-username").addEventListener("click", () => {
 socket.on("previousMessages", (messages) => {
   const messagesContainer = document.getElementById("messages");
   messagesContainer.innerHTML = ""; // Clear previous content
-  messages.forEach((message) => {
-    messagesContainer.innerHTML += `<li><span style="color:${message.color}">${message.username}</span>: ${message.message}</li>`;
+
+  // Loop through all previous messages
+  messages.forEach(({ username, message, color }) => {
+    const time = getFormattedTime(); // Get the time for each previous message
+    messagesContainer.innerHTML += `
+        <li>
+          <span style="color:${color}; font-weight: bold">${username}</span>: ${message}
+          <span style="font-size: 0.8em; color: gray; float: right;">${time}</span>
+        </li>
+      `;
   });
+
+  // Scroll to the bottom after loading previous messages
+  scrollToBottom();
 });
 
 // Handle new messages from the server
 socket.on("messageFromServerToAllClient", ({ username, message, color }) => {
   const messagesContainer = document.getElementById("messages");
-  messagesContainer.innerHTML += `<li><span style="color:${color}">${username}</span>: ${message}</li>`;
+  const time = getFormattedTime(); // Get the time for the new message
+  messagesContainer.innerHTML += `
+      <li>
+        <span style="color:${color}; font-weight: bold">${username}</span>: ${message}
+        <span style="font-size: 0.8em; color: gray; float: right;">${time}</span>
+      </li>
+    `;
+
+  // Scroll to the bottom after receiving a new message
+  scrollToBottom();
 });
 
 // Handle clearing messages event
@@ -73,5 +105,16 @@ document.querySelector(".btn-clear").addEventListener("click", () => {
 // Handle new users when someone joins or leaves
 socket.on("newClient", (message) => {
   const messagesContainer = document.getElementById("messages");
-  messagesContainer.innerHTML += `<li>${message}</li>`;
+  const time = getFormattedTime(); // Get the current time for the event
+
+  // Add the message with the timestamp to the messages container
+  messagesContainer.innerHTML += `
+      <li>
+        <span>${message}</span>
+        <span style="font-size: 0.8em; color: gray; float: right;">${time}</span>
+      </li>
+    `;
+
+  // Scroll to the bottom after a new user joins or leaves
+  scrollToBottom();
 });

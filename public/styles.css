@@ -1,5 +1,6 @@
 body {
   background: linear-gradient(135deg, #667eea, #764ba2);
+  overflow: hidden;
   color: #f8f9fa;
   display: flex;
   align-items: center;
@@ -43,6 +44,12 @@ body {
   padding: 0;
   max-height: 300px;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#messages::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
 
 #messages li {
