@@ -1,0 +1,146 @@
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+}
+
+#messages-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+#user-message {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+}
+
+#messages-form .btn-primary {
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+#messages {
+  list-style-type: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#messages li {
+  background: #4a5568;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  color: #e2e8f0;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.modal-content {
+  border-radius: 12px;
+  background-color: #2d3748;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-bottom: 2px solid #4a5568;
+  padding: 15px;
+}
+
+.modal-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 20px;
+  background-color: #4a5568;
+}
+
+.modal-body label {
+  display: block;
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+#username-input {
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  background-color: #5f6b7f;
+  color: #e2e8f0;
+}
+
+#username-input:focus {
+  border-color: #667eea;
+  outline: none;
+  background-color: #828c9e;
+}
+
+.modal-footer {
+  padding: 10px;
+  border-top: 2px solid #4a5568;
+  background-color: #4a5568;
+}
+
+.btn-primary {
+  background-color: #667eea;
+  border-color: #667eea;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #4c6ef5;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+}
+
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1.1);
+}
