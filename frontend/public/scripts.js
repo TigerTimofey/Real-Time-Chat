@@ -1,9 +1,5 @@
 // const socket = io("http://localhost:4000", {
-const socket = io("https://real-time-chat-coral-six.vercel.app", {
-  auth: {
-    secret: "This is a secret",
-  },
-});
+const socket = io("https://real-time-chat-coral-six.vercel.app", {});
 
 const getRandomColor = () => {
   const letters = "0123456789ABCDEF";
