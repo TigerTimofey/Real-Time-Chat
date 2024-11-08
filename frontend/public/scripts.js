@@ -4,7 +4,7 @@ const socket = io(
   window.location.hostname === "localhost"
     ? "http://localhost:4000"
     : "https://back-chat-pi.vercel.app",
-  {}
+  { transports: ["polling", "websocket"] }
 );
 
 const getRandomColor = () => {

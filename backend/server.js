@@ -11,6 +11,8 @@ const io = new Server(expressServer, {
   cors: {
     origin: "https://front-chat-flame.vercel.app",
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
   },
 });
 
