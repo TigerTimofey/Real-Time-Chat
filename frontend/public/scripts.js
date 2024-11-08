@@ -1,4 +1,5 @@
-const socket = io("http://localhost:4000", {
+// const socket = io("http://localhost:4000", {
+const socket = io("https://real-time-chat-dpsm.vercel.app", {
   auth: {
     secret: "This is a secret",
   },
