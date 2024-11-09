@@ -1,26 +1,19 @@
 const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+
+// Initialize Express
 const app = express();
+const port = 4000;
+
+// Serve static files from the "frontend/public" folder
 app.use(express.static("frontend/public"));
 
-const port = 4000;
-const expressServer = app.listen(port);
-console.log(`Server is running on port ${port}`);
+// Create an HTTP server for both Express and Socket.IO
+const server = http.createServer(app);
 
-const socket = new WebSocket(
-  "wss://back-chat-pi.vercel.app/socket.io/?EIO=4&transport=websocket"
-);
-socket.onopen = () => {
-  console.log("WebSocket connected");
-};
-socket.onerror = (error) => {
-  console.error("WebSocket error:", error);
-};
-socket.onmessage = (message) => {
-  console.log("Received message:", message);
-};
-
-const { Server } = require("socket.io");
-const io = new Server(expressServer, {
+// Set up Socket.IO server with CORS enabled
+const io = new Server(server, {
   cors: {
     origin: "https://front-chat-flame.vercel.app",
     methods: ["GET", "POST"],
@@ -32,7 +25,7 @@ const io = new Server(expressServer, {
 // Array to store all messages
 let messages = [];
 
-// Generate a random color for the user
+// Function to generate a random color for the user
 const getRandomColor = () => {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -42,6 +35,7 @@ const getRandomColor = () => {
   return color;
 };
 
+// Socket.IO connection handling
 io.on("connection", (socket) => {
   console.log(`${socket.id} has joined our server!`);
 
@@ -84,4 +78,9 @@ io.on("connection", (socket) => {
       io.emit("newClient", `${username} has left the chat`);
     }
   });
+});
+
+// Start the server
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
