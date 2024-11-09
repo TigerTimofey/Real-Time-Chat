@@ -1,15 +1,13 @@
 const express = require("express");
 const app = express();
+
+const cors = require("cors");
+app.use(cors());
+app.use(express.static("frontend/public"));
 const { Server } = require("socket.io");
-
-// Обработка статических файлов (если необходимо)
-app.use(express.static("public"));
-
-// Запуск сервера
 const port = 4000;
-const expressServer = app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const expressServer = app.listen(port);
+console.log(`Server is running on port ${port}`);
 
 const io = new Server(expressServer, {
   cors: {
